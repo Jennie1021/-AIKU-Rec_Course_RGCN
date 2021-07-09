@@ -27,11 +27,11 @@ def execute(query):
         return pc.fetchall()
 
 def read_rgcn(filename):
-    user = 'datahub'
-    password = 'datahub123!@#'
-    host_product = '163.152.11.12'
-    dbname = 'pkuhub'
-    port = '5432'
+    user = 
+    password =
+    host_product =
+    dbname =
+    port = 
 
     product_connection_string = "dbname={dbname} user={user} host={host} password={password} port={port}"\
                                 .format(dbname=dbname,
@@ -46,14 +46,14 @@ def read_rgcn(filename):
 
         pc = product.cursor()
 
-    rgcn = data_load("/root/jupyter_src/LJS/LJS_210121_elec_rec/20212R/Course Recom/RGCN/sql/course_reg.txt", product)
+    rgcn = data_load("./course_reg.txt", product)
 
 def sent2vec_glove(tokens, word_dict):
     '''
     embedding tokens
     '''
 
-    word_table = word_dict #glove에서 학습시킨 word dict
+    word_table = word_dict #glove word dict
     matrix = np.mean(np.array([word_table[t] for t in tokens if t in word_table]), axis=0) 
     print("#------Matrix Generated!------#")
     return matrix
@@ -61,11 +61,11 @@ def sent2vec_glove(tokens, word_dict):
 
 
 def prep():
-    user = 'datahub'
-    password = 'datahub123!@#'
-    host_product = '163.152.11.12'
-    dbname = 'pkuhub'
-    port = '5432'
+    user = 
+    password = 
+    host_product = 
+    dbname = 
+    port = 
 
     product_connection_string = "dbname={dbname} user={user} host={host} password={password} port={port}"\
                                 .format(dbname=dbname,
@@ -80,8 +80,8 @@ def prep():
 
         pc = product.cursor()
 
-    filter_reg = data_load("/root/jupyter_src/LJS/LJS_210121_elec_rec/20212R/Course Recom/RGCN/sql/course_reg.txt", product)
-    rgcn = data_load("/root/jupyter_src/LJS/LJS_210121_elec_rec/20212R/Course Recom/Glove/sql/rgcn_elec_now_open.txt", product)
+    filter_reg = data_load("./course_reg.txt", product)
+    rgcn = data_load("./rgcn_elec_now_open.txt", product)
 
     filter_reg = filter_reg[['std_id','cour_cd']].drop_duplicates()
     filter_reg['key'] = filter_reg['std_id'] + filter_reg['cour_cd']
@@ -113,12 +113,12 @@ class Recommend:
     def __init__(self):
         self.rgcn_f, self.mat, self.data, self.cour_list = prep() 
 
-    #최초페이지용 함수
+    #Initial load result
     def initial_load(self, std_id):
         first_rec = self.rgcn_f[self.rgcn_f['std_id']==std_id][['std_id','cour_cd','cour_nm','score']]
         return first_rec
 
-    #추천받기 누른 후 함수
+    #Calculate after students click some classes
     def cal(self, std_id, cour_cd_chosen):
         """
         cour_cd_chosen : list of clicked courses
