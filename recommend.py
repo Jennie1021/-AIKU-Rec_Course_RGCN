@@ -26,27 +26,27 @@ def execute(query):
         pc.execute(query)
         return pc.fetchall()
 
-def read_rgcn(filename):
-    user = 
-    password =
-    host_product =
-    dbname =
-    port = 
+# def read_rgcn(filename):
+#     user = 
+#     password =
+#     host_product =
+#     dbname =
+#     port = 
 
-    product_connection_string = "dbname={dbname} user={user} host={host} password={password} port={port}"\
-                                .format(dbname=dbname,
-                                        user=user,
-                                        host=host_product,
-                                        password=password,
-                                        port=port)
-    try:
-        product = pg.connect(product_connection_string)
-    except:
-        print('*****ERROR******')
+#     product_connection_string = "dbname={dbname} user={user} host={host} password={password} port={port}"\
+#                                 .format(dbname=dbname,
+#                                         user=user,
+#                                         host=host_product,
+#                                         password=password,
+#                                         port=port)
+#     try:
+#         product = pg.connect(product_connection_string)
+#     except:
+#         print('*****ERROR******')
 
-        pc = product.cursor()
+#         pc = product.cursor()
 
-    rgcn = data_load("./course_reg.txt", product)
+#     rgcn = data_load("./course_reg.txt", product)
 
 def sent2vec_glove(tokens, word_dict):
     '''
